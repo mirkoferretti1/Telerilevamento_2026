@@ -1,14 +1,14 @@
 # R code for visualizing multispectral data
+
+library(terra) #package for using spatial data
+library(imageRy) #package devoted to satellite images
 # install.packages("devtools")
 # install.packages("viridis")
-
 library(devtools)
 
 # install_github("ducciorocchini/imageRy")
 library(viridis)
 
-library(terra) #package for using spatial data
-library(imageRy) #package devoted to satellite images
 
 im.list()
 
@@ -46,6 +46,8 @@ dev.off()
 
 #alternativa a par
 im.multiframe(1,2)
+plot(b2, col=inferno(100))
+plot(b2, col=cl)
 
 #importing band 3
 b3 <- im.import("sentinel.dolomites.b3.tif")
@@ -74,6 +76,11 @@ plot(b4,col=clr)
 
 cln <- colorRampPalette(c("goldenrod3", "goldenrod2", "goldenrod"))(100)
 plot(b8,col=cln)
+
+plot(b2, col=inferno(100))
+plot(b3, col=inferno(100))
+plot(b4, col=inferno(100))
+plot(b8, col=inferno(100))
 
 sentinel <- c(b2, b3, b4, b8)
 plot(sentinel)
