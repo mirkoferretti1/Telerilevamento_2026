@@ -126,7 +126,51 @@ sentinel<- c(b2, b3, b4, b8)
 #4=8 nir
 
 #3 filtri e 4 bande
+im.plotRGB(sentinel, r=3, g=2, b=1) # natural colors (immagine a colori naturali)
+im.plotRGB(sentinel, r=4, g=3, b=2) #false colors (immagine in cui escludiamo il blu per includere il vicino infrarosso) 
+#è indifferente come metto gli altri colori, l'unica cosa importante è dove metto il NIR.
+
+im.multiframe (1,2)
 im.plotRGB(sentinel, r=3, g=2, b=1)
+
+#NIR on red
+im.plotRGB(sentinel, r=4, g=3, b=2)
+
+plot(sentinel[[4]])
+im.plotRGB(sentinel, r=4, g=3, b=2)
+
+#NIR on green
+im.plotRGB(sentinel, r=3, g=4, b=2)
+
+#esercizio: NIR on blue
+im.plotRGB(sentinel, r=3, g=2, b=4)
+
+# Plot the four manners of RGB in a single multiframe
+im.multiframe (2,2)
+im.plotRGB(sentinel, r=3, g=2, b=1)
+im.plotRGB(sentinel, r=4, g=3, b=2)
+im.plotRGB(sentinel, r=3, g=4, b=2)
+im.plotRGB(sentinel, r=3, g=2, b=4)
+
+# posizionamento delle bande visibili
+im.multiframe (1,2)
+im.plotRGB(sentinel, r=4, g=2, b=3)
+im.plotRGB(sentinel, r=4, g=3, b=2)
+
+pairs(sentinel)
+
+#semplificazione della funzione
+im.plotRGB(sentinel, 4, 2, 3)
+
+#plotRGB() from terra
+
+plotRGB(sentinel, 4, 2, 3, stretch="lin") # quando uso la funzione di imageRy non devo inserire lo stretch perchè è già sott'inteso.
+plotRGB(sentinel, 4, 2, 3, stretch="hist")
+
+
+
+
+
 
 
 
