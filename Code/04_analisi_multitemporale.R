@@ -3,6 +3,8 @@
 library(imageRy)
 library(terra)
 library(viridis)
+#install.packages("ggrdiges")
+library("ggrdiges")
 
 im.list()
 
@@ -59,3 +61,28 @@ plot(diff)
 #RGB sostituendo gli anni ai colori 
 
 im.plotRGB (gr, r=1, g=2, b=3)
+
+##########
+#importare dati
+
+ndvi <- im.import("Sentinel2_NDVI")
+
+hist(ndvi)
+
+im.ridgeline(ndvi, scale=2, palette="viridis")
+
+#gli do dei nomi diversi altrimenti li sovrascrive ogni volta e ottengo un solo plot alla fine
+
+names(ndvi) <- c("02feb", "05may", "08aug", "11nov")
+
+plot(ndvi[[1]], ndvi[[2]])
+
+abline(0, 1, col="red")
+
+# le scale ai due assi sono diverse
+
+# x min 0.3
+# y max 0.9
+
+plot(ndvi[[1]], ndvi[[2]], xlim=c(-0.3,0.9), ylim=c(-0.3,0.9))
+abline(0, 1, col="red")
