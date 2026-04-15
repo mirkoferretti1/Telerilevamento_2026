@@ -4,6 +4,7 @@ library(terra)
 library(viridis)
 library(imageRy)
 library(patchwork)
+library(ggridges)
 
 setwd("C:/Users/mirko/Downloads")
 
