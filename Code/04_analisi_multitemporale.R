@@ -3,8 +3,8 @@
 library(imageRy)
 library(terra)
 library(viridis)
-#install.packages("ggrdiges")
-library("ggrdiges")
+#install.packages("ggridges")
+library("ggridges")
 
 im.list()
 
