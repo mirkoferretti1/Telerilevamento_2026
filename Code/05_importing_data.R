@@ -76,21 +76,20 @@ plot(nir)
 plot(ndvi)
 dev.off()
 
-# 
+# patchwork
 p1 <- im.ggplot(ndvi)
-p2 <- im.ridgeline(ndvi, scale=1)
-
+p2 <- im.ridgeline(ndvi, scale=1, palette="viridis")
 p1 + p2
 
 pdf("figura2.pdf")
 p1 <- im.ggplot(ndvi)
-p2 <- im.ridgeline(ndvi, scale=1)
+p2 <- im.ridgeline(ndvi, scale=1, palette="viridis")
 p1 + p2
 dev.off()
 
 png("figura2.png")
 p1 <- im.ggplot(ndvi)
-p2 <- im.ridgeline(ndvi, scale=1)
+p2 <- im.ridgeline(ndvi, scale=1, palette="viridis")
 p1 + p2
 dev.off()
 
