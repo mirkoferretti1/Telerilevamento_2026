@@ -1,0 +1,86 @@
+# Codice R per classificare le immagini
+
+library(terra)
+library(imageRy)
+
+im.list()
+
+setwd("C:/Users/mirko/Downloads")
+
+sun<- im.import("Solar_Orbiter_s_first_views_of_the_Sun_pillars.jpg")
+
+# Classificazione
+sunc<- im.classify(sun, num_clusters=3)
+sunc<- im.classify(sun, num_clusters=3, seed=19)
+
+# Grand Canyon classification
+
+can<- im.import("dolansprings_oli_2013088_canyon_lrg.jpg")
+
+canc<- im.classify(can, num_clusters=4, seed=19)
+
+# Classificazione di un'immagine da internet
+list.files()
+
+dji<- rast("dji_fly_20241226_054143_0_1735188103432_photo_low_quality.JPG")
+dji<- flip(dji)
+
+plot(dji)
+
+djic<- im.classify(dji, num_clusters=3)
+
+# Classificazione dei dati del Mato Grosso
+
+m2006 <- im.import("matogrosso_ast_2006209_lrg.jpg")
+m1992 <- im.import("matogrosso_l5_1992219_lrg.jpg")
+
+im.multiframe(1,2)
+
+plot(m1992)
+plot(m2006)
+
+m1992c <- im.classify(m1992, num_clusters=2, seed=19)
+
+levels(m1992c) <- data.frame(
+  value = c(2, 1),
+  label = c("forest", "human")
+)
+
+m2006c <- im.classify(m2006, num_clusters=2, seed=19)
+
+levels(m2006c) <- data.frame(
+  value = c(2, 1),
+  label = c("forest", "human")
+)
+
+# Calcolo delle percentuali di foresta
+
+#1992
+freq1992<- freq(m1992c)
+freq1992
+
+perc1992<- freq1992$count * 100 /ncell(m1992c)
+perc1992
+
+#2006
+freq2006<- freq(m2006c)
+
+perc2006<- freq2006$count * 100 /ncell(m2006c)
+perc2006
+
+# Creo una tabella
+tabout<- data.frame( 
+  class=c("Forest", "Human"),
+  perc1992=c(83,17),
+  perc2006=c(45,55)
+  )
+tabout
+
+
+
+
+
+
+
+
+
