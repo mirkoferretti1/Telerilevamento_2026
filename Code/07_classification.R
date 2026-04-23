@@ -2,6 +2,9 @@
 
 library(terra)
 library(imageRy)
+library(ggplot2)
+library(patchwork)
+
 
 im.list()
 
@@ -75,6 +78,57 @@ tabout<- data.frame(
   perc2006=c(45,55)
   )
 tabout
+
+ggplot(tabout, aes(x=class, y=perc1992, color=class)) + #struttura
+       geom_bar(stat="identity", fill="white") # bar plot
+
+# esercizio plottare il grafico per il 2006
+
+ggplot(tabout, aes(x=class, y=perc2006, color=class)) +
+       geom_bar(stat="identity", fill="white")
+
+# Uso patchwork
+
+p1 <- ggplot(tabout, aes(x=class, y=perc1992, color=class)) +
+       geom_bar(stat="identity", fill="white")
+
+p2<- ggplot(tabout, aes(x=class, y=perc2006, color=class)) +
+       geom_bar(stat="identity", fill="white")
+
+p1 + p2
+
+# Le scale sono diverse, le aggiustiamo
+
+p1 <- ggplot(tabout, aes(x=class, y=perc1992, color=class)) +
+       geom_bar(stat="identity", fill="white")  +
+       ylim(c(0,100))
+
+p2<- ggplot(tabout, aes(x=class, y=perc2006, color=class)) +
+       geom_bar(stat="identity", fill="white") +
+       ylim(c(0,100))
+
+p1 + p2
+
+# togliamo una delle due legende perchè sono due uguali ed è ridondante
+
+p1 <- ggplot(tabout, aes(x=class, y=perc1992, color=class)) +
+       geom_bar(stat="identity", fill="white")  +
+       ylim(c(0,100)) +
+       theme(legend.position="none")
+
+p2<- ggplot(tabout, aes(x=class, y=perc2006, color=class)) +
+       geom_bar(stat="identity", fill="white") +
+       ylim(c(0,100))
+
+p1 + p2
+
+
+
+
+
+
+
+
 
 
 
